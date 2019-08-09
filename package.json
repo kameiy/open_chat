@@ -1,0 +1,27 @@
+{
+  "name": "open_chat",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "firebase": "^6.3.5",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.2"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^3.10.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
