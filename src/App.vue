@@ -4,11 +4,11 @@
     <div v-if="isSignedIn">
       <button @click="signOut">ログアウト</button>
       <p>User: {{ user.displayName }}</p>
+      <router-view/>
     </div>
     <div v-else>
       <button @click="signIn">ログイン</button>
     </div>
-    <router-view/>
   </div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
     this.onAuthStateChanged()
   },
   methods: {
+    // ログイン状況が変更されたら呼ばれる
     onAuthStateChanged () {
       firebase.auth().onAuthStateChanged( user => {
         this.user = user;
@@ -34,13 +35,16 @@ export default {
           true : false;
       })
     },
+    // ログインしてるか
     isUserSignedIn () {
       return !!firebase.auth().currentUser || false;
     },
+    // Google認証でログイン
     signIn () {
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithRedirect(provider)
     },
+    // ログアウト
     signOut () {
       firebase.auth().signOut()
     },
