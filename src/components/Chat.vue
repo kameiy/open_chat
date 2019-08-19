@@ -16,6 +16,7 @@
     </div>
 </template>
 <script>
+import firebase from 'firebase'
 export default {
     data () {
         return {
@@ -37,9 +38,21 @@ export default {
         }
     },
     created () {
-        this.roomname = $route.params.id;
+        this.getMessages();
     },
     methods: {
+        getMessages: async function(){
+            const roomid = this.$route.params.id;
+            const db = firebase.firestore();
+            const messagesRef = db.collection("rooms").doc(roomid);
+            const messagesSnapshot = await messagesRef.get();
+            if (messagesSnapshot.exists) {
+                console.log("Document data:", messagesSnapshot.data());
+                this.messages = messagesSnapshot.data().messages;
+            } else {
+                console.log("No such document!");
+            }
+        },
         sendmessage: function(){
             this.messages.push({author: this.name, text: this.input})
             this.input = ""
