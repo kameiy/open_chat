@@ -1,15 +1,33 @@
 <template>
-  <div id="app">
-    <h1>Open Chat</h1>
-    <div v-if="isSignedIn">
-      <button @click="signOut">ログアウト</button>
-      <p>User: {{ user.displayName }}</p>
-      <router-view/>
-    </div>
-    <div v-else>
-      <button @click="signIn">ログイン</button>
-    </div>
-  </div>
+  <v-app>
+    <v-navigation-drawer app>
+      <!-- -->
+    </v-navigation-drawer>
+    <v-app-bar app>
+      <h1>Open Chat</h1>
+      <div v-if="isSignedIn">
+        <v-btn @click="signOut">ログアウト</v-btn>
+      </div>
+      <div v-else>
+        <v-btn @click="signIn">ログイン</v-btn>
+      </div>
+    </v-app-bar>
+    <!-- Sizes your content based upon application components -->
+    <v-content>
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <div v-if="isSignedIn">
+          <p>User: {{ user.displayName }}</p>
+          <router-view/>
+        </div>
+        <div v-else>
+        </div>
+      </v-container>
+    </v-content>
+    <v-footer app>
+      <!-- -->
+    </v-footer>
+  </v-app>
 </template>
 
 <script>

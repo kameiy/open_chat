@@ -1,11 +1,15 @@
 <template>
     <div id="home">
         <h1>Home</h1>
-        <ul id="rooms">
-            <li v-for="(room, index) in rooms" :key="index">
-                <router-link v-bind:to="{ name: 'room', params: {id: room.uid}}">{{ room.name }}</router-link>
-            </li>
-        </ul>
+        <v-list>
+            <v-list-item v-for="(room, index) in rooms" :key="index">
+                <v-list-item-content>
+                    <v-list-item-title>
+                        <router-link v-bind:to="{ name: 'room', params: {id: room.uid}}">{{ room.name }}</router-link>
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+        </v-list>
     </div>
 </template>
 <script>
