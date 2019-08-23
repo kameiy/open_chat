@@ -1,26 +1,43 @@
 <template>
   <v-app>
-    <v-navigation-drawer app>
-      <!-- -->
+    <v-navigation-drawer temporary app v-model="drawer">
+      <v-list>
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn to="/">Home</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn to="/newroom">New Room</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <div v-if="isSignedIn">
+              <p>Login as: {{ user.email }}</p>
+              <v-btn @click="signOut">ログアウト</v-btn>
+            </div>
+            <div v-else>
+              <v-btn @click="signIn">ログイン</v-btn>
+            </div>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
     </v-navigation-drawer>
     <v-app-bar app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <h1>Open Chat</h1>
-      <div v-if="isSignedIn">
-        <v-btn @click="signOut">ログアウト</v-btn>
-      </div>
-      <div v-else>
-        <v-btn @click="signIn">ログイン</v-btn>
-      </div>
     </v-app-bar>
     <!-- Sizes your content based upon application components -->
     <v-content>
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <div v-if="isSignedIn">
-          <p>User: {{ user.displayName }}</p>
           <router-view/>
         </div>
         <div v-else>
+          <v-btn @click="signIn">ログイン</v-btn>
         </div>
       </v-container>
     </v-content>
@@ -39,6 +56,7 @@ export default {
     return {
       user: null,
       isSignedIn: null,
+      drawer: false,
     }
   },
   created () {
