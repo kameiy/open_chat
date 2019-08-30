@@ -18,11 +18,10 @@ var config = {
   appId: "1:145657697673:web:801ace7a1b558ba3"
 }
 const firebaseApp = firebase.initializeApp(config)
-
 export const db = firebaseApp.firestore();
 
 new Vue({
   render: h => h(App),
   vuetify,
-  router
+  router,
 }).$mount('#app')

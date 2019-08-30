@@ -9,7 +9,22 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn to="/newroom">New Room</v-btn>
+            <v-btn to="/mypage">マイページ</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn to="/newroom">ルーム作成</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn @click="openInquiry">問い合わせ</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn @click="openAdministrator">運営者情報</v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
@@ -37,6 +52,7 @@
           <router-view/>
         </div>
         <div v-else>
+          <Discription></Discription>
           <v-btn @click="signIn">ログイン</v-btn>
         </div>
       </v-container>
@@ -49,9 +65,11 @@
 
 <script>
 import firebase from 'firebase'
+import Discription from './components/Discription.vue'
 
 export default {
   name: 'app',
+  components: { Discription },
   data () {
     return {
       user: null,
@@ -84,6 +102,12 @@ export default {
     signOut () {
       firebase.auth().signOut()
     },
+    openInquiry () {
+      window.open("https://forms.gle/HHb55u3bMY8pFxZc7", '_blank')
+    },
+    openAdministrator () {
+      window.open("https://computer-consultant-1979.business.site", '_blank')
+    }
   }
 }
 </script>
